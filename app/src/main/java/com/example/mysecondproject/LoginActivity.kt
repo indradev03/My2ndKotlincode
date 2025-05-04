@@ -69,14 +69,15 @@ fun LoginBody(innerPadding: PaddingValues){
             .padding(innerPadding)
             .fillMaxSize()
             .background(color = Color.White)
-            .padding(top = 50.dp),
+            .padding(top = 100.dp),
         horizontalAlignment = Alignment.CenterHorizontally
-    )
-    {
+    ) {
         Image(
             painter = painterResource(R.drawable.loginimage),
             contentDescription = null,
-            modifier = Modifier.height(250.dp).width(250.dp)
+            modifier = Modifier
+                .height(250.dp)
+                .width(250.dp)
         )
 
         OutlinedTextField(
@@ -88,33 +89,22 @@ fun LoginBody(innerPadding: PaddingValues){
                 .padding(horizontal = 10.dp)
                 .padding(top = 50.dp),
             shape = RoundedCornerShape(12.dp),
-            keyboardOptions = KeyboardOptions(
-                keyboardType =KeyboardType.Email
-            ),
-
-
-
-            label = {
-                Text("Email")
-            },
-
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            label = { Text("Email") },
             placeholder = {
-                Text("Saroj@gmail.com")
+                Text(
+                    text = "Saroj@gmail.com",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
             },
             value = username,
-            onValueChange = {input->
-                    username = input
-
-            }
-
+            onValueChange = { input -> username = input }
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            // Call back funtion ho yo
-            // kunai pani call back le return garyeko
-            // function variable ma hunxa ra tyo variable ko namm 'it' ho
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp),
@@ -123,25 +113,20 @@ fun LoginBody(innerPadding: PaddingValues){
             visualTransformation =
                 if (passwordVisibility) PasswordVisualTransformation()
                 else VisualTransformation.None,
+
             // Keyboard Option EMail, Text, Password
-
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password
-            ),
-
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             prefix = {
                 Icon(
                     painter = painterResource(R.drawable.baseline_lock_outline_24),
                     contentDescription = null
                 )
-
             },
-
             suffix = {
                 val visibilityIcon = if (passwordVisibility) {
-                    R.drawable.baseline_visibility_24 // 👁️ Visible icon
+                    R.drawable.baseline_visibility_24
                 } else {
-                    R.drawable.baseline_visibility_off_24 // 🙈 Hidden icon
+                    R.drawable.baseline_visibility_off_24
                 }
 
                 Icon(
@@ -152,23 +137,61 @@ fun LoginBody(innerPadding: PaddingValues){
                     }
                 )
             },
-
-//            label = {
-//                Text("Password")
-//            },
             placeholder = {
-                Text("******")
+                Text(
+                    text = "******",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
             },
             value = password,
-            onValueChange = {input->
-                password = input
-
-            }
-
+            onValueChange = { input -> password = input }
         )
 
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // 🔗 Forgot Password Text
+        Text(
+            text = "Forgot Password?",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp)
+                .clickable {
+                    // TODO: Handle forgot password
+                },
+            color = Color.Blue,
+            textAlign = androidx.compose.ui.text.style.TextAlign.End
+        )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        // 🔘 Login Button
+        Button(
+            onClick = {
+                // TODO: Handle login click
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0A84FF)) // Blue
+        ) {
+            Text("Login")
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // 🆕 Sign Up Prompt
+        Text(
+            text = "Don't have an account? Sign Up",
+            modifier = Modifier.clickable {
+                // TODO: Handle sign-up navigation
+            },
+            color = Color.Blue
+        )
     }
 }
+
 
 @Preview
 @Composable
