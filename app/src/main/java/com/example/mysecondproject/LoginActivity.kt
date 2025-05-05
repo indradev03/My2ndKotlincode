@@ -7,8 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,8 +19,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -63,6 +69,7 @@ fun LoginBody(innerPadding: PaddingValues){
     var  username by remember { mutableStateOf("") }
     var  password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
+    var rememberMe by remember { mutableStateOf(false) }
 
     Column (
         modifier = Modifier
@@ -90,7 +97,12 @@ fun LoginBody(innerPadding: PaddingValues){
                 .padding(top = 50.dp),
             shape = RoundedCornerShape(12.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+
             label = { Text("Email") },
+
+            prefix = {
+                Icon(Icons.Default.Email, contentDescription = null)
+            },
             placeholder = {
                 Text(
                     text = "Saroj@gmail.com",
@@ -148,20 +160,41 @@ fun LoginBody(innerPadding: PaddingValues){
             onValueChange = { input -> password = input }
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Row (modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically)
+        {
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+            ){
+                Checkbox(checked = rememberMe,
+                    onCheckedChange = {remember->
+                        rememberMe = remember
+                    },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color.Green, // this is for chnage color after checked in
 
-        // 🔗 Forgot Password Text
-        Text(
-            text = "Forgot Password?",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 10.dp)
-                .clickable {
-                    // TODO: Handle forgot password
-                },
-            color = Color.Blue,
-            textAlign = androidx.compose.ui.text.style.TextAlign.End
-        )
+                        checkmarkColor = Color.White // This is for tick one
+                    )
+                )
+
+                Text(
+                    text = "Remember Me"
+                )
+
+            }
+            // 🔗 Forgot Password Text
+            Text(
+                text = "Forget Password",
+                modifier = Modifier.padding(end = 5.dp)
+                    .clickable {  },
+
+                color = Color.Blue,
+            )
+        }
+
 
         Spacer(modifier = Modifier.height(30.dp))
 
@@ -178,17 +211,17 @@ fun LoginBody(innerPadding: PaddingValues){
         ) {
             Text("Login")
         }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // 🆕 Sign Up Prompt
-        Text(
-            text = "Don't have an account? Sign Up",
-            modifier = Modifier.clickable {
-                // TODO: Handle sign-up navigation
-            },
-            color = Color.Blue
-        )
+//
+//        Spacer(modifier = Modifier.height(20.dp))
+//
+//        // 🆕 Sign Up Prompt
+//        Text(
+//            text = "Don't have an account? Sign Up",
+//            modifier = Modifier.clickable {
+//                // TODO: Handle sign-up navigation
+//            },
+//            color = Color.Blue
+//        )
     }
 }
 
