@@ -19,8 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
+
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -41,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -76,15 +76,15 @@ fun LoginBody(innerPadding: PaddingValues){
             .padding(innerPadding)
             .fillMaxSize()
             .background(color = Color.White)
-            .padding(top = 100.dp),
+            .padding(top = 5.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = painterResource(R.drawable.loginimage),
             contentDescription = null,
             modifier = Modifier
-                .height(250.dp)
-                .width(250.dp)
+                .height(400.dp)
+                .width(400.dp)
         )
 
         OutlinedTextField(
@@ -98,16 +98,16 @@ fun LoginBody(innerPadding: PaddingValues){
             shape = RoundedCornerShape(12.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
 
-            label = { Text("Email") },
-
             prefix = {
-                Icon(Icons.Default.Email, contentDescription = null)
+                Icon(
+                    painter = painterResource(R.drawable.baseline_email_24),
+                    contentDescription = null
+                )
             },
             placeholder = {
                 Text(
                     text = "Saroj@gmail.com",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+
                 )
             },
             value = username,
@@ -153,7 +153,6 @@ fun LoginBody(innerPadding: PaddingValues){
                 Text(
                     text = "******",
                     modifier = Modifier.fillMaxWidth(),
-                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
                 )
             },
             value = password,
