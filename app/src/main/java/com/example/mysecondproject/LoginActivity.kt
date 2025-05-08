@@ -1,5 +1,6 @@
 package com.example.mysecondproject
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -36,11 +37,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -63,12 +64,19 @@ class LoginActivity: ComponentActivity(){
 @Composable
 fun LoginBody(innerPadding: PaddingValues){
 
+    // LocalContext le arko file sanga add garauxa
+    val context = LocalContext.current  // Add this at the top of LoginBody()
     // State variable
     // import garda suru ma get ra ani set garne
 
+
+    // email
     var  username by remember { mutableStateOf("") }
+    //Password
     var  password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
+
+    //Checkbox
     var rememberMe by remember { mutableStateOf(false) }
 
     Column (
@@ -79,14 +87,18 @@ fun LoginBody(innerPadding: PaddingValues){
             .padding(top = 5.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        //Top Image
         Image(
             painter = painterResource(R.drawable.loginimage),
             contentDescription = null,
             modifier = Modifier
-                .height(400.dp)
-                .width(400.dp)
+                .height(200.dp)
+                .width(200.dp)
         )
 
+
+        // For Email
         OutlinedTextField(
             // Call back funtion ho yo
             // kunai pani call back le return garyeko
@@ -108,7 +120,7 @@ fun LoginBody(innerPadding: PaddingValues){
                 Text(
                     text = "Saroj@gmail.com",
 
-                )
+                    )
             },
             value = username,
             onValueChange = { input -> username = input }
@@ -116,6 +128,8 @@ fun LoginBody(innerPadding: PaddingValues){
 
         Spacer(modifier = Modifier.height(20.dp))
 
+
+        // for Password
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -128,22 +142,15 @@ fun LoginBody(innerPadding: PaddingValues){
 
             // Keyboard Option EMail, Text, Password
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            prefix = {
-                Icon(
-                    painter = painterResource(R.drawable.baseline_lock_outline_24),
-                    contentDescription = null
-                )
-            },
-            suffix = {
-                val visibilityIcon = if (passwordVisibility) {
-                    R.drawable.baseline_visibility_24
-                } else {
-                    R.drawable.baseline_visibility_off_24
-                }
 
+            // For visibilty and non visibility
+            suffix = {
                 Icon(
-                    painter = painterResource(id = visibilityIcon),
-                    contentDescription = if (passwordVisibility) "Hide password" else "Show password",
+                    painter = painterResource(
+                        if(passwordVisibility)
+                            R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
+                    ),
+                    contentDescription = null,
                     modifier = Modifier.clickable {
                         passwordVisibility = !passwordVisibility
                     }
@@ -159,6 +166,7 @@ fun LoginBody(innerPadding: PaddingValues){
             onValueChange = { input -> password = input }
         )
 
+        // Check box and Forget Password Linkup
         Row (modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp),
@@ -200,7 +208,7 @@ fun LoginBody(innerPadding: PaddingValues){
         // 🔘 Login Button
         Button(
             onClick = {
-                // TODO: Handle login click
+                // Handle login click
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -210,20 +218,91 @@ fun LoginBody(innerPadding: PaddingValues){
         ) {
             Text("Login")
         }
-//
-//        Spacer(modifier = Modifier.height(20.dp))
-//
-//        // 🆕 Sign Up Prompt
-//        Text(
-//            text = "Don't have an account? Sign Up",
-//            modifier = Modifier.clickable {
-//                // TODO: Handle sign-up navigation
-//            },
-//            color = Color.Blue
-//        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+
+        // If already have aacount Sign up link
+        Row (modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ){
+
+
+            Text("Don't have an account? ")
+            // 🆕 Sign Up Prompt
+            // Then inside the clickable Sign Up text:
+            Text(
+                text = "Sign Up",
+                modifier = Modifier.clickable {
+                    // Connected with registrationActivity
+                    val intent = Intent(context, RegistrationActivity::class.java)
+                    context.startActivity(intent)
+                },
+                color = Color.Blue
+            )
+        }
+
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+
+
+        //Other method for login
+        Row(modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center)
+             {
+
+            Icon(painter = painterResource(R.drawable.baseline_horizontal_rule_24),
+                contentDescription = null)
+            Text(text = "Use Other Method to Signup"
+
+                )
+            Icon(painter = painterResource(R.drawable.baseline_horizontal_rule_24),
+                contentDescription = null)
+        }
+
+            // Facebook and google buttons
+        Row {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                ),
+                onClick = {
+
+            }) {
+                Image(
+                    painter = painterResource(R.drawable.facebook),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(50.dp))
+
+
+            }
+            Spacer(modifier = Modifier.width(1.dp))
+
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                ),
+                onClick = {
+
+            }) {
+                Image(
+                    painter = painterResource(R.drawable.google),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(50.dp))
+            }
+
+        }
     }
 }
-
 
 @Preview
 @Composable
