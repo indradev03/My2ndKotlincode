@@ -93,8 +93,9 @@ fun LoginBody(innerPadding: PaddingValues){
             painter = painterResource(R.drawable.loginimage),
             contentDescription = null,
             modifier = Modifier
-                .height(200.dp)
-                .width(200.dp)
+                .padding(top = 20.dp)
+                .height(250.dp)
+                .width(250.dp)
         )
 
 
@@ -137,7 +138,7 @@ fun LoginBody(innerPadding: PaddingValues){
             shape = RoundedCornerShape(12.dp),
             // Lukaune kaam garxa
             visualTransformation =
-                if (passwordVisibility) PasswordVisualTransformation()
+                if (!passwordVisibility) PasswordVisualTransformation()
                 else VisualTransformation.None,
 
             // Keyboard Option EMail, Text, Password
@@ -147,8 +148,8 @@ fun LoginBody(innerPadding: PaddingValues){
             suffix = {
                 Icon(
                     painter = painterResource(
-                        if(passwordVisibility)
-                            R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
+                        if(!passwordVisibility)
+                            R.drawable.baseline_visibility_off_24 else R.drawable.baseline_visibility_24
                     ),
                     contentDescription = null,
                     modifier = Modifier.clickable {
@@ -255,7 +256,6 @@ fun LoginBody(innerPadding: PaddingValues){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
              {
-
             Icon(painter = painterResource(R.drawable.baseline_horizontal_rule_24),
                 contentDescription = null)
             Text(text = "Use Other Method to Signup"
@@ -283,7 +283,7 @@ fun LoginBody(innerPadding: PaddingValues){
 
 
             }
-            Spacer(modifier = Modifier.width(1.dp))
+
 
             Button(
                 colors = ButtonDefaults.buttonColors(

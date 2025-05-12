@@ -95,6 +95,9 @@ fun RegistrationBody(innerPadding: PaddingValues) {
         ) {
             Text(text = "Register", fontSize = 25.sp)
         }
+
+
+        Spacer(modifier = Modifier.height(40.dp))
             // For Firstname and last name textfiled
         Row(
             modifier = Modifier
