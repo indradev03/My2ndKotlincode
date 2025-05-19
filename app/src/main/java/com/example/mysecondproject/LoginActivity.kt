@@ -1,5 +1,6 @@
 package com.example.mysecondproject
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -78,6 +79,9 @@ fun LoginBody(innerPadding: PaddingValues){
 
     //Checkbox
     var rememberMe by remember { mutableStateOf(false) }
+
+    // for connecting registeration
+    val activity = context as Activity
 
     Column (
         modifier = Modifier
@@ -209,7 +213,12 @@ fun LoginBody(innerPadding: PaddingValues){
         // 🔘 Login Button
         Button(
             onClick = {
-                // Handle login click
+                val intent = Intent(context,DashboardActivity::class.java)
+                intent.putExtra("email",username)
+                intent.putExtra("password",password)
+
+                context.startActivity(intent)
+                activity.finish()
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -242,7 +251,14 @@ fun LoginBody(innerPadding: PaddingValues){
                     val intent = Intent(context, RegistrationActivity::class.java)
                     context.startActivity(intent)
                 },
+                // intent 2 typeko hunxa implict ra explict
+                // app vitra navigate hunye lai explict vanne thau ma hunxa
+                // app lai xodyera bahira navigate garirako xa vane implicit vanxa
+                // eg. camera khulnu , photo upload garnu implicit ma parxa
                 color = Color.Blue
+
+                // Destory garna lai
+                // activity.finish()
             )
         }
 

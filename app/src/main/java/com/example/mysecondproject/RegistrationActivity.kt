@@ -1,5 +1,6 @@
 package com.example.mysecondproject
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
@@ -79,6 +80,8 @@ fun RegistrationBody(innerPadding: PaddingValues) {
         year, month, day
     )
 
+    val activity = context as? Activity
+
     Column(
         modifier = Modifier
             .padding(innerPadding)
@@ -86,6 +89,34 @@ fun RegistrationBody(innerPadding: PaddingValues) {
             .background(Color.White)
     ) {
 
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp, top = 10.dp)
+                .padding(8.dp)
+        ) {
+            Button(
+                onClick = {
+                    activity?.finish()
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF1976D2), // Blue button background
+                    contentColor = Color.White // Text color
+                )
+            ) {
+                // Then inside the clickable Sign In text:
+                Text(
+                    text = "Back",
+                    modifier = Modifier.clickable {
+                        // Connected with LoginActivity
+                        val intent = Intent(context, LoginActivity::class.java)
+                        context.startActivity(intent)
+                    },
+                    color = Color.Blue
+                )
+
+            }
+        }
         // For Main Heading
         Row(
             modifier = Modifier

@@ -12,8 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MysecondProject"
         tools:targetApi="31">
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="true"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.MysecondProject">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!-- LoginActivity is now the launcher activity -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity> <!-- LoginActivity is now the launcher activity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -21,17 +31,26 @@
             android:theme="@style/Theme.MysecondProject">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.MysecondProject">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!-- RegistrationActivity is now the launcher activity -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- RegistrationActivity is now the launcher activity -->
         <activity
             android:name=".RegistrationActivity"
             android:exported="true"
             android:label="@string/title_activity_registration"
             android:theme="@style/Theme.MysecondProject" />
-
     </application>
 
 </manifest>
