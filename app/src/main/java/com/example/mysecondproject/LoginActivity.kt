@@ -1,6 +1,7 @@
 package com.example.mysecondproject
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,11 +30,13 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -81,7 +84,19 @@ fun LoginBody(innerPadding: PaddingValues){
     var rememberMe by remember { mutableStateOf(false) }
 
     // for connecting registeration
-    val activity = context as Activity
+    val activity = context as? Activity
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+    val sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE)
+
+    val localEmail : String? = sharedPreferences.getString("email","")
+    val localpassword : String? = sharedPreferences.getString("password","")
+
+    username = localEmail.toString()
+    password = localpassword.toString()
+    val editor = sharedPreferences.edit()
+
 
     Column (
         modifier = Modifier
@@ -213,12 +228,18 @@ fun LoginBody(innerPadding: PaddingValues){
         // 🔘 Login Button
         Button(
             onClick = {
+
+                if (rememberMe){
+                    editor.putString("email", username)
+                    editor.putString("password",password)
+                    editor.apply()
+                }
                 val intent = Intent(context,DashboardActivity::class.java)
                 intent.putExtra("email",username)
                 intent.putExtra("password",password)
 
                 context.startActivity(intent)
-                activity.finish()
+                activity?.finish()
             },
             modifier = Modifier
                 .fillMaxWidth()

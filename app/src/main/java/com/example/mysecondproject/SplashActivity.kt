@@ -1,6 +1,7 @@
 package com.example.mysecondproject
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,9 +16,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -44,13 +48,25 @@ class SplashActivity : ComponentActivity() {
 fun SplashBody(innerPadding: PaddingValues){
 
     val context = LocalContext.current
-    val activity = context as Activity
+    val activity = context as? Activity
+
+    val sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE)
+
+    val localEmail : String? = sharedPreferences.getString("email","")
+    val localpassword : String? = sharedPreferences.getString("password","")
 
     LaunchedEffect(Unit) {
         delay(3000)
-        val intent = Intent(context,LoginActivity::class.java)
-        context.startActivity(intent)
-        activity.finish()
+
+        if (localEmail.toString().isEmpty()){
+            val intent = Intent(context,LoginActivity::class.java)
+            context.startActivity(intent)
+            activity?.finish()
+        }else{
+            val intent = Intent(context,DashboardActivity::class.java)
+            context.startActivity(intent)
+            activity?.finish()
+        }
     }
 
     Column (modifier = Modifier.padding(innerPadding).fillMaxSize(),

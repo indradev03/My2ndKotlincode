@@ -1,6 +1,7 @@
 package com.example.mysecondproject
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -36,15 +37,18 @@ fun DashboardBody(innerPadding: PaddingValues) {
     val context = LocalContext.current
     val activity = context as Activity
 
-    val email: String? = activity.intent.getStringExtra("email") // ? this means nullabe
-    val password: String? = activity.intent.getStringExtra("password")
+//    val email: String? = activity.intent.getStringExtra("email") // ? this means nullabe
+//    val password: String? = activity.intent.getStringExtra("password")
+
+    val sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE)
+
+    val localEmail : String? = sharedPreferences.getString("email","")
+    val localpassword : String? = sharedPreferences.getString("password","")
 
         Column  (modifier = Modifier.padding(innerPadding).fillMaxSize())
         {
-            Text("Good Morning, $email" ) // $ ko kaam varaible dine ho
+            Text("Good Morning, $localEmail" ) // $ ko kaam varaible dine ho
         }
-
-
     }
 
 
