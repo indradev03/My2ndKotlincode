@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -41,6 +45,7 @@ import androidx.compose.ui.res.painterResource
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.provider.FontsContractCompat.Columns
 
 class ListViewActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -167,8 +172,27 @@ fun ListViewBody(innerPadding: PaddingValues){
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
-            .padding(50.dp)
+            .padding(0.dp)
     ) {
+
+        item {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2) ,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalArrangement =  Arrangement.spacedBy(10.dp),
+                modifier = Modifier.height(500.dp).fillMaxWidth()
+            ) {
+
+                items(images.size) { index ->
+                    Image(
+                        painter = painterResource(images[index]),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(100.dp)
+                    )
+                }
+            }
+        }
         item {
 
             LazyRow(modifier = Modifier.fillMaxWidth())
@@ -191,116 +215,116 @@ fun ListViewBody(innerPadding: PaddingValues){
 
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Red)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Green)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Gray)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Magenta)
             )
 
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Red)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Green)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Gray)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Magenta)
             )
 
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Red)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Green)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Gray)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Magenta)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Red)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Green)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Gray)
             )
             Box(
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(200.dp)
                     .padding(5.dp)
-                    .width(300.dp)
+                    .width(400.dp)
                     .background(color = Color.Magenta)
             )
 
